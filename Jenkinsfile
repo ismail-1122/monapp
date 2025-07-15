@@ -1,17 +1,16 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'gradle:8.3-jdk17' // ✅ Image Docker avec Gradle + Java 17
+            args '-v /var/run/docker.sock:/var/run/docker.sock'
+        }
+    }
 
     environment {
         IMAGE_NAME = "ismail/monapp:${env.BRANCH_NAME}"
     }
 
     stages {
-        stage('Set gradlew executable') {
-            steps {
-                sh 'chmod +x ./gradlew'
-            }
-        }
-
         stage('Build') {
             steps {
                 sh './gradlew build -x test'
