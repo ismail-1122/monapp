@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monapp-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: monapp
+  template:
+    metadata:
+      labels:
+        app: monapp
+    spec:
+      containers:
+        - name: monapp-container
+          image: ismail/monapp:1.0
+          ports:
+            - containerPort: 8080
