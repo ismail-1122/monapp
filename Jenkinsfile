@@ -6,6 +6,12 @@ pipeline {
     }
 
     stages {
+        stage('Set gradlew executable') {
+            steps {
+                sh 'chmod +x ./gradlew'
+            }
+        }
+
         stage('Build') {
             steps {
                 sh './gradlew build -x test'
