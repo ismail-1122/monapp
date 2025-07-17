@@ -1,49 +1,32 @@
 pipeline {
-  agent {
-    kubernetes {
-      label 'kaniko-agent'
-      defaultContainer 'kaniko'
-      yaml """
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-    - name: kaniko
-      image: gcr.io/kaniko-project/executor:latest
-      command:
-        - cat
-      tty: true
-      volumeMounts:
-        - name: kaniko-secret
-          mountPath: /kaniko/.docker
-  restartPolicy: Never
-  volumes:
-    - name: kaniko-secret
-      secret:
-        secretName: regcred
-"""
+    agent any
+
+    environment {
+        IMAGE = "ismail/monapp"
+        TAG = "1.0"
     }
-  }
 
-  environment {
-    IMAGE = "ismail/monapp"
-    TAG = "v1"
-    REGISTRY = "docker.io"
-  }
-
-  stages {
-    stage('Build with Kaniko') {
-      steps {
-        container('kaniko') {
-          sh '''
-            /kaniko/executor \
-              --context `pwd` \
-              --dockerfile `pwd`/Dockerfile \
-              --destination=$REGISTRY/$IMAGE:$TAG \
-              --verbosity=info
-          '''
+    stages {
+        stage('Checkout') {
+            steps {
+                git url: 'https://github.com/ismail-1122/monapp', branch: 'master'
+            }
         }
-      }
+
+        stage('Build Docker Image with Kaniko') {
+            steps {
+                sh '''
+                    mkdir -p /kaniko/.docker
+                    echo '{ "auths": { "https://index.docker.io/v1/": { "auth": "'"$(echo -n $DOCKER_USERNAME:$DOCKER_PASSWORD | base64)"'" } } }' > /kaniko/.docker/config.json
+
+                    /kaniko/executor \
+                      --dockerfile=Dockerfile \
+                      --context=`pwd` \
+                      --destination=${IMAGE}:${TAG} \
+                      --insecure \
+                      --skip-tls-verify
+                '''
+            }
+        }
     }
-  }
 }
