@@ -5,6 +5,9 @@ pipeline {
       yaml """
 apiVersion: v1
 kind: Pod
+metadata:
+  labels:
+    app: monjenkins-agent
 spec:
   containers:
     - name: kaniko
