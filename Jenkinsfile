@@ -1,7 +1,6 @@
 pipeline {
   agent {
     kubernetes {
-      label 'kaniko-agent'
       defaultContainer 'kaniko'
       yaml """
 apiVersion: v1
@@ -9,14 +8,14 @@ kind: Pod
 spec:
   containers:
     - name: kaniko
-      image: gcr.io/kaniko-project/executor:latest
+      image: gcr.io/kaniko-project/executor:debug
       command:
-        - cat
-      tty: true
+        - /bin/sh
+        - -c
+        - "tail -f /dev/null"
       volumeMounts:
         - name: kaniko-secret
           mountPath: /kaniko/.docker
-  restartPolicy: Never
   volumes:
     - name: kaniko-secret
       secret:
@@ -33,11 +32,11 @@ spec:
 
   stages {
 
-  stage('Test') {
-    steps {
-      echo "Pipeline reached the Test stage"
-    }
-  }
+      stage('Test') {
+        steps {
+          echo "Pipeline reached the Test stage"
+        }
+      }
 
     stage('Build & Push Image') {
       steps {
@@ -52,5 +51,7 @@ spec:
         }
       }
     }
+
   }
+
 }
