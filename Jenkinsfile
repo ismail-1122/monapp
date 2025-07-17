@@ -32,6 +32,13 @@ spec:
   }
 
   stages {
+
+  stage('Test') {
+    steps {
+      echo "Pipeline reached the Test stage"
+    }
+  }
+
     stage('Build & Push Image') {
       steps {
         container('kaniko') {
