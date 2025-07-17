@@ -26,7 +26,7 @@ spec:
     }
 
     environment {
-        IMAGE = "ismail/monapp"
+        IMAGE = "ismailov25/monapp"
         TAG = "v1"
         REGISTRY = "docker.io"
     }
