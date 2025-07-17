@@ -8,6 +8,9 @@ metadata:
   labels:
     jenkins: slave
 spec:
+  securityContext:
+    runAsUser: 0
+    runAsGroup: 1000
   containers:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
@@ -21,6 +24,9 @@ spec:
   - name: kaniko-secret
     secret:
       secretName: regcred
+      items:
+       - key: .dockerconfigjson
+         path: config.json
 """
         }
     }
