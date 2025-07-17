@@ -35,6 +35,7 @@ spec:
     stage('Build with Kaniko') {
       steps {
         container('kaniko') {
+          echo "asjkasjkkjas"
           sh '''
             /kaniko/executor \
               --context `pwd` \
