@@ -32,14 +32,13 @@ spec:
   }
 
   stages {
-    stage('Build with Kaniko') {
+    stage('Build & Push Image') {
       steps {
         container('kaniko') {
-          echo "asjkasjkkjas"
           sh '''
             /kaniko/executor \
-              --context `pwd` \
-              --dockerfile `pwd`/Dockerfile \
+              --context=dir://$(pwd) \
+              --dockerfile=Dockerfile \
               --destination=$REGISTRY/$IMAGE:$TAG \
               --verbosity=info
           '''
