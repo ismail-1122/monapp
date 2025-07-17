@@ -1,28 +1,49 @@
 pipeline {
-    agent any
-
-    environment {
-        IMAGE_NAME = "ismail/monapp:${env.BRANCH_NAME}"
+  agent {
+    kubernetes {
+      label 'kaniko-agent'
+      defaultContainer 'kaniko'
+      yaml """
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+    - name: kaniko
+      image: gcr.io/kaniko-project/executor:latest
+      command:
+        - cat
+      tty: true
+      volumeMounts:
+        - name: kaniko-secret
+          mountPath: /kaniko/.docker
+  restartPolicy: Never
+  volumes:
+    - name: kaniko-secret
+      secret:
+        secretName: regcred
+"""
     }
+  }
 
-    stages {
-        stage('Build') {
-            steps {
-                sh './gradlew build -x test'
-            }
-        }
+  environment {
+    IMAGE = "ismail/monapp"
+    TAG = "v1"
+    REGISTRY = "docker.io"
+  }
 
-        stage('Docker Build') {
-            steps {
-                sh 'docker build -t $IMAGE_NAME .'
-            }
+  stages {
+    stage('Build with Kaniko') {
+      steps {
+        container('kaniko') {
+          sh '''
+            /kaniko/executor \
+              --context `pwd` \
+              --dockerfile `pwd`/Dockerfile \
+              --destination=$REGISTRY/$IMAGE:$TAG \
+              --verbosity=info
+          '''
         }
-
-        stage('Deploy to Minikube') {
-            steps {
-                sh 'kubectl apply -f k8s/deployment.yaml'
-                sh 'kubectl apply -f k8s/service.yaml'
-            }
-        }
+      }
     }
+  }
 }
