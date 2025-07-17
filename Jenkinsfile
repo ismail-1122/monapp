@@ -47,6 +47,7 @@ spec:
         stage('Build & Push Image') {
             steps {
                 container('kaniko') {
+                    sh "ls -la /kaniko/.docker && cat /kaniko/.docker/config.json"
                     sh """
                         /kaniko/executor \
                           --context=dir://${env.WORKSPACE} \
