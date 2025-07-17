@@ -33,8 +33,8 @@ spec:
 
     environment {
         IMAGE = "ismailov25/monapp"
-        TAG = "build-${env.BUILD_ID}-${sh(script: 'echo $((RANDOM % 10000))', returnStdout: true).trim()}"
         REGISTRY = "docker.io"
+        TAG = "build-${env.BUILD_ID}-${new Random().nextInt(10000)}"
     }
 
     stages {
@@ -47,13 +47,13 @@ spec:
         stage('Build & Push Image') {
             steps {
                 container('kaniko') {
-                    sh '''
+                    sh """
                         /kaniko/executor \
-                          --context=dir://\$(pwd) \
+                          --context=dir://${env.WORKSPACE} \
                           --dockerfile=Dockerfile \
-                          --destination=\$REGISTRY/\$IMAGE:\$TAG \
+                          --destination=${env.REGISTRY}/${env.IMAGE}:${env.TAG} \
                           --verbosity=info
-                    '''
+                    """
                 }
             }
         }
