@@ -1,61 +1,37 @@
 pipeline {
-    agent {
-        kubernetes {
-            yaml """
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: kaniko
-    image: gcr.io/kaniko-project/executor:latest
-    command:
-    - /busybox/sh
-    args:
-    - -c
-    - cat
-    tty: true
-    volumeMounts:
-    - name: kaniko-secret
-      mountPath: /kaniko/.docker
-  volumes:
-  - name: kaniko-secret
-    secret:
-      secretName: regcred
-"""
-        }
-    }
+    agent any  // This will use any available agent (not necessarily Kubernetes)
 
     environment {
-        IMAGE_NAME = "docker.io/ismail/monapp:\${BRANCH_NAME}"
-        DOCKERFILE_PATH = "./Dockerfile"
-        CONTEXT = "."
+        IMAGE_NAME = "ismailov25/monapp:${env.BRANCH_NAME}"
     }
 
     stages {
-        stage('Build JAR') {
+        stage('Set gradlew executable') {
             steps {
-                // Ce build se fait hors du conteneur kaniko (par défaut)
-                sh 'chmod +x ./gradlew && ./gradlew build -x test'
+                sh 'chmod +x ./gradlew'
             }
         }
 
-        stage('Build and Push with Kaniko') {
+        stage('Build JAR') {
             steps {
-                container('kaniko') {
-                    sh '''
-                    /kaniko/executor \
-                      --dockerfile=$DOCKERFILE_PATH \
-                      --destination=$IMAGE_NAME \
-                      --context=dir://$(pwd) \
-                      --cleanup
-                    '''
+                sh './gradlew build -x test'
+            }
+        }
+
+        stage('Docker Build and Push') {
+            steps {
+                script {
+                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub-credentials') {
+                        def customImage = docker.build("${IMAGE_NAME}")
+                        customImage.push()
+                    }
                 }
             }
         }
 
-
         stage('Deploy to Minikube') {
             steps {
+                // Ensure kubectl is configured on the Jenkins agent
                 sh 'kubectl apply -f k8s/deployment.yaml'
                 sh 'kubectl apply -f k8s/service.yaml'
             }
