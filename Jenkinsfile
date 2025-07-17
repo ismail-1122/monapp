@@ -27,7 +27,7 @@ spec:
 
     environment {
         IMAGE = "ismailov25/monapp"
-        TAG = "v1"
+        TAG = "build-${env.BUILD_ID}-${sh(script: 'echo $((RANDOM % 10000))', returnStdout: true).trim()}"
         REGISTRY = "docker.io"
     }
 
