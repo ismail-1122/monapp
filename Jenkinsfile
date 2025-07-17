@@ -1,52 +1,61 @@
 pipeline {
-    agent any
+    agent {
+        kubernetes {
+            yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    jenkins: slave
+spec:
+  containers:
+  - name: kaniko
+    image: gcr.io/kaniko-project/executor:debug
+    command:
+    - /busybox/cat
+    tty: true
+    volumeMounts:
+    - name: kaniko-secret
+      mountPath: /kaniko/.docker
+  volumes:
+  - name: kaniko-secret
+    secret:
+      secretName: regcred
+"""
+        }
+    }
+
+    environment {
+        IMAGE = "ismail/monapp"
+        TAG = "v1"
+        REGISTRY = "docker.io"
+    }
 
     stages {
-        stage('Debug Info') {
+        stage('Test') {
             steps {
-                echo "=== PIPELINE STARTED ==="
-                echo "Build Number: ${BUILD_NUMBER}"
-                echo "Job Name: ${JOB_NAME}"
-                echo "Workspace: ${WORKSPACE}"
-
-                script {
-                    echo "Current directory contents:"
-                    sh 'pwd && ls -la'
-
-                    if (fileExists('Dockerfile')) {
-                        echo "✓ Dockerfile found"
-                        sh 'echo "Dockerfile content:" && cat Dockerfile'
-                    } else {
-                        echo "✗ Dockerfile not found"
-                    }
-
-                    if (fileExists('Jenkinsfile')) {
-                        echo "✓ Jenkinsfile found"
-                    } else {
-                        echo "✗ Jenkinsfile not found"
-                    }
-                }
+                echo "Pipeline reached the Test stage"
             }
         }
 
-        stage('Test Stage') {
+        stage('Build & Push Image') {
             steps {
-                echo "=== TEST STAGE EXECUTING ==="
-                sh 'echo "This is a test command"'
-                sh 'date'
+                container('kaniko') {
+                    sh '''
+                        /kaniko/executor \
+                          --context=dir://\$(pwd) \
+                          --dockerfile=Dockerfile \
+                          --destination=\$REGISTRY/\$IMAGE:\$TAG \
+                          --verbosity=info
+                    '''
+                }
             }
         }
     }
 
     post {
         always {
-            echo "=== PIPELINE COMPLETED ==="
-        }
-        success {
-            echo "✓ Pipeline succeeded"
-        }
-        failure {
-            echo "✗ Pipeline failed"
+            echo "Pipeline completed"
         }
     }
 }
