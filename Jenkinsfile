@@ -12,6 +12,11 @@ spec:
     runAsUser: 0
     runAsGroup: 1000
   containers:
+  - name: gradle
+    image: gradle:8.7-jdk17-alpine
+    command:
+    - cat
+    tty: true
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
     command:
@@ -38,16 +43,18 @@ spec:
     }
 
     stages {
-        stage('Test') {
+        stage('Build JAR') {
             steps {
-                echo "Pipeline reached the Test stage"
+                container('gradle') {
+                    sh './gradlew clean bootJar'
+                }
             }
         }
 
         stage('Build & Push Image') {
             steps {
                 container('kaniko') {
-                    sh "ls -la /kaniko/.docker && cat /kaniko/.docker/config.json"
+                    sh 'ls -lh build/libs/' // Debug : vérifier que le .jar existe
                     sh """
                         /kaniko/executor \
                           --context=dir://${env.WORKSPACE} \
