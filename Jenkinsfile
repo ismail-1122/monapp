@@ -15,7 +15,9 @@ spec:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
     command:
-    - /busybox/cat
+    - sleep
+    args:
+    - 99d
     tty: true
     volumeMounts:
     - name: kaniko-secret
@@ -49,10 +51,10 @@ spec:
                 container('kaniko') {
                     sh "ls -la /kaniko/.docker && cat /kaniko/.docker/config.json"
                     sh """
-                        /kaniko/executor \
-                          --context=dir://${env.WORKSPACE} \
-                          --dockerfile=Dockerfile \
-                          --destination=${env.REGISTRY}/${env.IMAGE}:${env.TAG} \
+                        /kaniko/executor \\
+                          --context=dir://${env.WORKSPACE} \\
+                          --dockerfile=Dockerfile \\
+                          --destination=${env.REGISTRY}/${env.IMAGE}:${env.TAG} \\
                           --verbosity=info
                     """
                 }
