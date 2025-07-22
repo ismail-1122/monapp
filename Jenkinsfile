@@ -44,11 +44,12 @@ spec:
 
     stages {
         stage('Build JAR') {
-            steps {
-                container('gradle') {
-                    sh './gradlew clean bootJar'
-                }
+          steps {
+            container('gradle') {
+              sh 'chmod +x ./gradlew'
+              sh './gradlew clean bootJar'
             }
+          }
         }
 
         stage('Build & Push Image') {
