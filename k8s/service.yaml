@@ -8,7 +8,8 @@ spec:
     app: monapp
   ports:
     - protocol: TCP
-      port: 8080
-      targetPort: 8080
+      port: 8081
+      targetPort: 8081
+      nodePort: 30522
       # NodePort automatique entre 30000-32767, ou tu peux fixer un port spécifique :
       # nodePort: 31000
