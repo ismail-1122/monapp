@@ -15,9 +15,7 @@ spec:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
     command:
-    - /busybox/sleep
-    args:
-    - "99999"
+    - /busybox/cat
     tty: true
     volumeMounts:
     - name: kaniko-secret
@@ -36,25 +34,25 @@ spec:
     environment {
         IMAGE = "ismailov25/monapp"
         REGISTRY = "docker.io"
-        TAG = "dev-${env.BUILD_ID}-${new Random().nextInt(10000)}"
+        TAG = "build-${env.BUILD_ID}-${new Random().nextInt(10000)}"
     }
 
     stages {
         stage('Test') {
             steps {
-                echo "Pipeline reached the Test stage on DEV branch"
+                echo "Pipeline reached the Test stage"
             }
         }
 
         stage('Build & Push Image') {
             steps {
                 container('kaniko') {
-                    sh "ls -la /kaniko/.docker && /busybox/cat /kaniko/.docker/config.json"
+                    sh "ls -la /kaniko/.docker && cat /kaniko/.docker/config.json"
                     sh """
-                        /kaniko/executor \\
-                          --context=dir://${env.WORKSPACE} \\
-                          --dockerfile=Dockerfile \\
-                          --destination=${env.REGISTRY}/${env.IMAGE}:${env.TAG} \\
+                        /kaniko/executor \
+                          --context=dir://${env.WORKSPACE} \
+                          --dockerfile=Dockerfile \
+                          --destination=${env.REGISTRY}/${env.IMAGE}:${env.TAG} \
                           --verbosity=info
                     """
                 }
@@ -64,7 +62,7 @@ spec:
 
     post {
         always {
-            echo "DEV Pipeline completed"
+            echo "Pipeline completed"
         }
     }
 }
