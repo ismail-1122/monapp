@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: monapp-frontend-container
-          image: ismailov25/monapp-frontend:build-10-5068
+          image: ismailov25/monapp-frontend:build-11-7915
           ports:
             - containerPort: 80
