@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: monapp-container
-          image: ismailov25/monapp:build-24-9489
+          image: ismailov25/monapp:build-25-7705
           ports:
             - containerPort: 8081
