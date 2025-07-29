@@ -1,0 +1,312 @@
+    1  git init
+    2  clear
+    3  git init
+    4  git commit -m
+    5  git commit
+    6  cd tp1-DevOps
+    7  cd tp1-DevOps.txt
+    8  cd tp1-DevOps.txt;
+    9  mkdir Tp-Git
+   10  cd Tp-Git;
+   11  git add .
+   12  git branch -M main
+   13  git remote add origin https://github.com/ismail-1122/TP-Git
+   14  git push -u origin main
+   15  clear
+   16  git init
+   17  cd TP-Git
+   18  git commit -m
+   19  git commit -m "backgroundset"
+   20  git commit
+   21  git init
+   22  cd TP-Git
+   23  git commit
+   24  git commit -m "backgroundset"
+   25  git add .
+   26  git commit
+   27  git commit -m "backgroundset"
+   28  git commit -m 
+   29  git commit 
+   30  git add .
+   31  git branch -M main
+   32  git remote add origin https://github.com/ismail-1122/TP-Git
+   33  git push -u origin main
+   34  clear
+   35  git init
+   36  git pull
+   37  cd ..
+   38  git init
+   39  git branch
+   40  cd ..
+   41  cd ..
+   42  pwd
+   43  mkdir projet
+   44  cd projet
+   45  git branch
+   46  git branch
+   47  git branch -D example2
+   48  git branch -d example2
+   49  git branch -d example2
+   50  pwd
+   51  ls
+   52  cd Downloads/
+   53  ls
+   54  git branch -d example2
+   55  git checkout main
+   56  pwd
+   57  git branch
+   58  git branch -d example2
+   59  git branch -D example2
+   60  git branch -D example1
+   61  pwd
+   62  mkdir projet
+   63  cd projet
+   64  clear
+   65  ls
+   66  git init
+   67  touch README.md
+   68  nano README.md
+   69  touch LICENSE
+   70  nano README.md
+   71  nano LICENSE
+   72  git status
+   73  git add LICENSE
+   74  git status
+   75  git commit -m "ajout de license"
+   76  git status
+   77  git config --global user.email "ismailkellal25@gmail.com"
+   78  git config --global user.name "ismail-1122"
+   79  git commit -m "ajout de license"
+   80  git status
+   81  pwd
+   82  cd mystack/
+   83  touch docker-compose.yml
+   84  ls
+   85  docker-compose up -d
+   86  docker-compose up -d
+   87  kubectl version --client
+   88  minikube --version
+   89  minikube version
+   90  minikube version
+   91  docker run hello word 
+   92  docker run hello-word 
+   93  docker --version
+   94  docker run hello-word
+   95  sudo su
+   96  docker run hello-world
+   97  exit
+   98  helm version
+   99  minikube start --driver=docker
+  100  kubectl get nodes
+  101  [200~gradle build -x test
+  102  build -x test
+  103  gradle build -x test
+  104  ./gradlew build -x test
+  105  minikube status
+  106  minikube start
+  107  kubectl config use-context minikube
+  108  kubectl cluster-info
+  109  kubectl apply -f k8s/deployment.yaml
+  110  pwd
+  111  ls
+  112  cd C:\Users\emif_\IdeaProjects\Spring Initializr
+  113  cd Users\emif_\IdeaProjects\Spring Initializr
+  114  cd C:\Users\emif_\IdeaProjects;
+  115  cd C:\Users\emif_\IdeaProjects
+  116  cd C:\Users\emif_\IdeaProjects\Spring Initializr;
+  117  cd C:\Users\emif_\IdeaProjects\Spring Initializr
+  118  cd "C:\Users\emif_\IdeaProjects\Spring Initializr"
+  119  kubectl rollout restart deployment/monapp-deployment
+  120  kubectl apply -f k8s/service.yaml
+  121  kubectl get pods
+  122  kubectl get services
+  123  minikube service monapp-service
+  124  eval $(minikube -p minikube docker-env)
+  125  eval $(minikube -p minikube docker-env)
+  126  docker build -t ismail/monapp:1.0 .
+  127  kubectl rollout restart deployment/monapp-deployment
+  128  kubectl get pods
+  129  minikube service monapp-service
+  130  docker build -t ismail/monapp:1.1 .
+  131  kubectl set image deployment/monapp-deployment monapp=ismail/monapp:1.1
+  132  kubectl set image deployment/monapp-deployment monapp-container=ismail/monapp:1.1
+  133  kubectl get pods
+  134  minikube service monapp-service
+  135  kubectl rollout restart deployment/monapp-deployment
+  136  minikube service monapp-service
+  137  kubectl get pods
+  138  kubectl get services
+  139  minikube service monapp-service
+  140  minikube service monapp-service
+  141  docker
+  142  docker img
+  143  docker images
+  144  docker login
+  145  docker push ismail/monapp:1.0
+  146  docker push ismail/monapp:1.0
+  147  docker login
+  148  docker login
+  149  docker push ismail/monapp:1.0
+  150  docker push image ismail/monapp:1.0
+  151  docker push --help
+  152  docker push monapp:1.0
+  153  docker push ismail/monapp:1.0
+  154  helm version
+  155  helm version
+  156  cd "C:\Users\emif_IdeaProjects\Spring Initializr"
+  157  cd "C:\Users\emif_\IdeaProjects\Spring Initializr"
+  158  argocd app create monapp --repo https://github.com/ismail-1122/monapp.git --path k8s --dest-server https://kubernetes.default.svc --dest-namespace default
+  159  [200~curl -sSL -o argocd.exe https://github.com/argoproj/argo-cd/releases/latest/download/argocd-windows-amd64.exe
+  160  curl -sSL -o argocd.exe https://github.com/argoproj/argo-cd/releases/latest/download/argocd-windows-amd64.exe
+  161  mv argocd.exe /usr/local/bin/argocd.exe
+  162  ./argocd.exe
+  163  ./argocd.exe version
+  164  ./argocd.exe app create monapp --repo https://github.com/ismail-1122/monapp.git --path k8s --dest-server https://kubernetes.default.svc --dest-namespace default
+  165  argocd app sync monapp
+  166  cd "C:\users\emif_\IdeaProjects\Spring Initializr"
+  167  argocd version
+  168  argocd version
+  169  cd "C:\users\emif_\IdeaProjects\Spring Initializr"
+  170  argocd version
+  171  cd ..
+  172  cd ..
+  173  cd ..
+  174  cd ..
+  175  cd..
+  176  cd ..
+  177  cd ..
+  178  argocd version
+  179  cd c
+  180  argocd version
+  181  cd "C:\users\emif_\IdeaProjects\Spring Initializr"
+  182  argocd version
+  183  echo $PATH
+  184  argocd.exe version
+  185  argocd version
+  186  argocd version
+  187  /c/Program\ Files/argocd/argocd.exe version
+  188  /c/Program\ Files/argocd/argocd.exe version
+  189  /c/Program\ Files/argocd/  version
+  190  argocd version
+  191   cd "C:\users\emif_\IdeaProjects\Spring Initializr"
+  192  argocd app create monapp   --repo https://github.com/ismail-1122/monapp.git   --path k8s   --dest-server https://kubernetes.default.svc   --dest-namespace default
+  193  argocd app sync monapp
+  194  argocd login localhost:8080 --username admin --password <ton-mot-de-passe> --insecure
+  195  kubectl -n argocd get pods
+  196  kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
+  197  argocd login <adresse-serveur-argocd> --username admin --password PP10DA63PnFzPVIy
+  198  argocd login https://127.0.0.1:8080/applications --username admin --password PP10DA63PnFzPVIy
+  199  argocd login https://127.0.0.1:8080 --username admin --password PP10DA63PnFzPVIy
+  200  argocd login 127.0.0.1:8080 --username admin --password PP10DA63PnFzPVIy --insecure
+  201  argocd app create monapp   --repo https://github.com/ismail-1122/monapp.git   --path k8s   --dest-server https://kubernetes.default.svc   --dest-namespace default
+  202  argocd app sync monapp
+  203  argocd app get monapp
+  204  kubectl logs monapp-deployment-8b8678bd8-mlprt -c monapp-container
+  205  kubectl describe pod monapp-deployment-8b8678bd8-mlprt
+  206  docker run
+  207  docker run mysql
+  208  docker build -t monapp-image .
+  209  docker run -p 8081:8080 monapp-image
+  210  docker run -p 8080:8080 monapp-image
+  211  docker run -p 8080:8080 monapp-image
+  212  ./gradlew build
+  213  docker run -p 8081:8080 monapp-image
+  214  docker run -p 8080:8080 monapp-image
+  215  docker run -p 8081:8081 monapp-image
+  216  docker run -p 8083:8080 monapp-image
+  217  mysql -h localhost -P 3306 -u user -p
+  218  mysql -h localhost -P 3306 -u admin -p
+  219  mysql -h localhost -P 3306 -u root -p
+  220  ls -lh build/libs/
+  221  docker build -t ismail/monapp-0.0.1-SNAPSHOT.jar
+  222  docker build -t ismailov25/monapp:build-21-2214 .
+  223  kubectl apply -f k8s/mysql/
+  224  kubectl get pods -n <namespace>
+  225  kubectl get pods -n default
+  226  kubectl logs monapp-deployment-6475fc76c7-xx7k5
+  227  kubectl get svc
+  228  kubectl get pods
+  229  kubectl exec -it mysql-0 -- mysql -u root -p
+  230  # puis entre le mot de passe root
+  231  SHOW DATABASES;
+  232  kubectl exec -it mysql-0 -- mysql -u root -p -e "SHOW DATABASES;"
+  233  git rm --cached argocd.exe
+  234  git filter-branch --force --index-filter "git rm --cached --ignore-unmatch argocd.exe" --prune-empty --tag-name-filter cat -- --all
+  235  rm -rf .git/refs/original/
+  236  git reflog expire --expire=now --all
+  237  git gc --prune=now --aggressive
+  238  git push origin --force --all
+  239  git push origin --force --tags
+  240  git filter-branch --force --index-filter "git rm --cached --ignore-unmatch argocd.exe" --prune-empty --tag-name-filter cat -- --all
+  241  rm -rf .git/refs/original/
+  242  git reflog expire --expire=now --all
+  243  git gc --prune=now --aggressive
+  244  git push origin --force --all
+  245  git push origin --force --tags
+  246  mysql -u root -p
+  247  docker ps
+  248  docker ps
+  249  docker ps -a
+  250  docker start mysql-container
+  251  docker ps
+  252  docker exec -it mysql-container mysql -uuser -p
+  253  docker exec -it mysql-container mysql -uroot -p
+  254  kubectl get pod
+  255  kubectl exec -ti mysql-0 -- bash
+  256  kubectl exec -ti mysql-0 -- bash
+  257  kubectl get pod
+  258  kubectl get services
+  259  kubectl describe service monapp-service
+  260  minikube ip
+  261  curl http://192.168.49.2:30522
+  262  curl http://192.168.49.2:30522
+  263  kubectl apply -f monapp-service.yaml
+  264  kubectl apply -f service.yaml
+  265  kubectl apply -f monapp-service
+  266  kubectl apply -f service.yaml
+  267  cd k8s
+  268  kubectl apply -f service.yaml
+  269  kubectl get pods
+  270  kubectl delete  pod monapp-deployment-74678557d4-w2rvh --force
+  271  kubectl get pods
+  272  curl http://192.168.49.2:30522
+  273  cd ..
+  274  kubectl exec -it monapp-deployment-74678557d4-w2rvh -- curl localhost:8081
+  275  kubectl exec -it monapp-deployment-74678557d4-fkrrk -- curl localhost:8081
+  276  kubectl logs monapp-deployment-74678557d4-fkrrk
+  277  kubectl port-forward pod/monapp-deployment-74678557d4-fkrrk 8080:8080
+  278  curl http://localhost:8080
+  279  kubectl delete -f service.yaml && kubectl apply -f service.yaml
+  280  cd k8s
+  281* $ kubectl delete -f service.yaml && kubectl apply -f service.yaml
+
+  282  curl http://192.168.49.2:30522
+  283  kubectl get svc
+  284  kubectl get svc
+  285  kubectl get pods
+  286  kubectl rollout restart deployment monapp-deployment
+  287  curl http://192.168.49.2:30522
+  288  kubectl get pods
+  289  kubectl logs monapp-deployment-74678557d4-fkrrk
+  290  kubectl get pods
+  291  kubectl logs monapp-deployment-74678557d4-fkrrk
+  292  kubectl get svc
+  293  curl http://192.168.49.2:30522
+  294  minikube ip
+  295  curl http://192.168.49.2:8081:30522
+  296  curl http://192.168.49.2:8081
+  297  kubectl describe pod monapp-deployment-bcdd44d58-m4zd4
+  298  kubectl logs monapp-deployment-bcdd44d58-m4zd4
+  299  kubectl get pods
+  300  kubectl get svc
+  301  curl http://192.168.49.2:30522
+  302  kubectl get pods
+  303  kubectl get svc
+  304  kubectl get pod
+  305   minikube service monapp-service
+  306  npm install -g @angular/cli
+  307  minikube ip
+  308  kubectl get services
+  309   minikube service monapp-service
+  310  pwd
+  311  history > history.txt
