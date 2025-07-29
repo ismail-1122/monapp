@@ -18,4 +18,9 @@ public class UserController {
     public List<User> getAllUsers() {
         return repo.findAll();
     }
+
+    @PostMapping
+    public User addUser(@RequestBody User user) {
+        return repo.save(user);
+    }
 }
